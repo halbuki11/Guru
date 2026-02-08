@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "filename" : "Leaning Tower of Pisa.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

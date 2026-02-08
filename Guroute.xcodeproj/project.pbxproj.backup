@@ -1,0 +1,806 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F700000000000001 /* GurouteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000001 /* GurouteApp.swift */; };
+		F700000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000002 /* ContentView.swift */; };
+		F700000000000003 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000003 /* AppConfig.swift */; };
+		F700000000000004 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000004 /* AppColors.swift */; };
+		F700000000000005 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000005 /* ThemeManager.swift */; };
+		F700000000000006 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000006 /* Trip.swift */; };
+		F700000000000007 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000007 /* User.swift */; };
+		F700000000000008 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000008 /* Weather.swift */; };
+		F700000000000009 /* Passport.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000009 /* Passport.swift */; };
+		F70000000000000A /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80000000000000A /* APIService.swift */; };
+		F70000000000000B /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80000000000000B /* AuthManager.swift */; };
+		F70000000000000C /* SupabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80000000000000C /* SupabaseService.swift */; };
+		F70000000000000D /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80000000000000D /* WeatherService.swift */; };
+		F70000000000000E /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80000000000000E /* AIService.swift */; };
+		F70000000000000F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80000000000000F /* Extensions.swift */; };
+		F700000000000010 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000010 /* AuthView.swift */; };
+		F700000000000011 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000011 /* ExploreView.swift */; };
+		F700000000000012 /* TripsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000012 /* TripsListView.swift */; };
+		F700000000000013 /* WorldMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000013 /* WorldMapView.swift */; };
+		F700000000000014 /* PassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000014 /* PassportView.swift */; };
+		F700000000000015 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000015 /* SettingsView.swift */; };
+		F700000000000016 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000016 /* OnboardingView.swift */; };
+		F700000000000017 /* GeneratingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000017 /* GeneratingView.swift */; };
+		F700000000000018 /* CreateTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000018 /* CreateTripView.swift */; };
+		F700000000000019 /* TripDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000019 /* TripDetailView.swift */; };
+		F70000000000001A /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80000000000001A /* EditProfileView.swift */; };
+		F70000000000001B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F80000000000001B /* Assets.xcassets */; };
+		F700000000000020 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000020 /* StoreManager.swift */; };
+		F700000000000021 /* countries.geojson in Resources */ = {isa = PBXBuildFile; fileRef = F800000000000021 /* countries.geojson */; };
+		F700000000000030 /* UIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000030 /* UIComponents.swift */; };
+		F700000000000031 /* GroqService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000031 /* GroqService.swift */; };
+		F700000000000032 /* ClaudeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000032 /* ClaudeService.swift */; };
+		F700000000000033 /* Translations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000033 /* Translations.swift */; };
+		F700000000000034 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000034 /* UserManager.swift */; };
+		F700000000000035 /* AppleSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000035 /* AppleSignInView.swift */; };
+		F700000000000040 /* TicketmasterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000040 /* TicketmasterService.swift */; };
+		F700000000000050 /* SpaceMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F800000000000050 /* SpaceMono-Regular.ttf */; };
+		F700000000000051 /* SpaceMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F800000000000051 /* SpaceMono-Bold.ttf */; };
+		F700000000000052 /* SpaceMono-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F800000000000052 /* SpaceMono-Italic.ttf */; };
+		F700000000000053 /* SpaceMono-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F800000000000053 /* SpaceMono-BoldItalic.ttf */; };
+		F700000000000060 /* CitySearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000060 /* CitySearchService.swift */; };
+		F700000000000061 /* StampImageMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000061 /* StampImageMapping.swift */; };
+		F700000000000070 /* ImagePipelineConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F800000000000070 /* ImagePipelineConfig.swift */; };
+		FC3E35E22F339F74009F7A3F /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = FD00000000000001 /* Supabase */; };
+		FC3E35E32F339F74009F7A3F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FD00000000000002 /* Alamofire */; };
+		FC3E35E42F339F74009F7A3F /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = FD00000000000003 /* Nuke */; };
+		FC3E35E52F339F74009F7A3F /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = FD00000000000004 /* NukeUI */; };
+		FC3E35E62F339F74009F7A3F /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = FD00000000000005 /* KeychainAccess */; };
+		FC3E35E72F339F74009F7A3F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FD00000000000006 /* Lottie */; };
+		FC810FD72F389848007BF3B0 /* CreditManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC810FD62F389848007BF3B0 /* CreditManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F800000000000000 /* Guroute.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guroute.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F800000000000001 /* GurouteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GurouteApp.swift; sourceTree = "<group>"; };
+		F800000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F800000000000003 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		F800000000000004 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		F800000000000005 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		F800000000000006 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		F800000000000007 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F800000000000008 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		F800000000000009 /* Passport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passport.swift; sourceTree = "<group>"; };
+		F80000000000000A /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		F80000000000000B /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		F80000000000000C /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
+		F80000000000000D /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		F80000000000000E /* AIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIService.swift; sourceTree = "<group>"; };
+		F80000000000000F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F800000000000010 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		F800000000000011 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
+		F800000000000012 /* TripsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsListView.swift; sourceTree = "<group>"; };
+		F800000000000013 /* WorldMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapView.swift; sourceTree = "<group>"; };
+		F800000000000014 /* PassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportView.swift; sourceTree = "<group>"; };
+		F800000000000015 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F800000000000016 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		F800000000000017 /* GeneratingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratingView.swift; sourceTree = "<group>"; };
+		F800000000000018 /* CreateTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripView.swift; sourceTree = "<group>"; };
+		F800000000000019 /* TripDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailView.swift; sourceTree = "<group>"; };
+		F80000000000001A /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		F80000000000001B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F80000000000001D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F80000000000001E /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		F80000000000001F /* Guroute.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Guroute.entitlements; sourceTree = "<group>"; };
+		F800000000000020 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
+		F800000000000021 /* countries.geojson */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = countries.geojson; path = Resources/countries.geojson; sourceTree = "<group>"; };
+		F800000000000030 /* UIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIComponents.swift; sourceTree = "<group>"; };
+		F800000000000031 /* GroqService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroqService.swift; sourceTree = "<group>"; };
+		F800000000000032 /* ClaudeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeService.swift; sourceTree = "<group>"; };
+		F800000000000033 /* Translations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translations.swift; sourceTree = "<group>"; };
+		F800000000000034 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		F800000000000035 /* AppleSignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInView.swift; sourceTree = "<group>"; };
+		F800000000000040 /* TicketmasterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketmasterService.swift; sourceTree = "<group>"; };
+		F800000000000050 /* SpaceMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpaceMono-Regular.ttf"; path = "Resources/Fonts/SpaceMono-Regular.ttf"; sourceTree = "<group>"; };
+		F800000000000051 /* SpaceMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpaceMono-Bold.ttf"; path = "Resources/Fonts/SpaceMono-Bold.ttf"; sourceTree = "<group>"; };
+		F800000000000052 /* SpaceMono-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpaceMono-Italic.ttf"; path = "Resources/Fonts/SpaceMono-Italic.ttf"; sourceTree = "<group>"; };
+		F800000000000053 /* SpaceMono-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpaceMono-BoldItalic.ttf"; path = "Resources/Fonts/SpaceMono-BoldItalic.ttf"; sourceTree = "<group>"; };
+		F800000000000060 /* CitySearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchService.swift; sourceTree = "<group>"; };
+		F800000000000061 /* StampImageMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampImageMapping.swift; sourceTree = "<group>"; };
+		F800000000000070 /* ImagePipelineConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePipelineConfig.swift; sourceTree = "<group>"; };
+		FC810FD62F389848007BF3B0 /* CreditManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F900000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC3E35E72F339F74009F7A3F /* Lottie in Frameworks */,
+				FC3E35E62F339F74009F7A3F /* KeychainAccess in Frameworks */,
+				FC3E35E52F339F74009F7A3F /* NukeUI in Frameworks */,
+				FC3E35E42F339F74009F7A3F /* Nuke in Frameworks */,
+				FC3E35E32F339F74009F7A3F /* Alamofire in Frameworks */,
+				FC3E35E22F339F74009F7A3F /* Supabase in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FA00000000000000 = {
+			isa = PBXGroup;
+			children = (
+				FA00000000000001 /* Guroute */,
+				FA00000000000002 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FA00000000000001 /* Guroute */ = {
+			isa = PBXGroup;
+			children = (
+				FA00000000000003 /* App */,
+				FA00000000000004 /* Core */,
+				FA00000000000005 /* Features */,
+				FA00000000000006 /* Resources */,
+				F80000000000001D /* Info.plist */,
+				F80000000000001E /* Config.xcconfig */,
+				F80000000000001F /* Guroute.entitlements */,
+			);
+			path = Guroute;
+			sourceTree = "<group>";
+		};
+		FA00000000000002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000000 /* Guroute.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FA00000000000003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000001 /* GurouteApp.swift */,
+				F800000000000002 /* ContentView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		FA00000000000004 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				FA00000000000007 /* Config */,
+				FA00000000000008 /* Theme */,
+				FA00000000000009 /* Models */,
+				FA0000000000000A /* Services */,
+				FA0000000000000B /* Utils */,
+				FA00000000000030 /* Components */,
+				FA00000000000034 /* Localization */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		FA00000000000005 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				FA0000000000000C /* Auth */,
+				FA0000000000000D /* Home */,
+				FA0000000000000E /* Map */,
+				FA0000000000000F /* Passport */,
+				FA00000000000010 /* Settings */,
+				FA00000000000011 /* Onboarding */,
+				FA00000000000012 /* Generating */,
+				FA00000000000013 /* Plan */,
+				FA00000000000014 /* Profile */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		FA00000000000006 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FA00000000000050 /* Fonts */,
+				F80000000000001B /* Assets.xcassets */,
+				F800000000000021 /* countries.geojson */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		FA00000000000007 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000003 /* AppConfig.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		FA00000000000008 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000004 /* AppColors.swift */,
+				F800000000000005 /* ThemeManager.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		FA00000000000009 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000006 /* Trip.swift */,
+				F800000000000007 /* User.swift */,
+				F800000000000008 /* Weather.swift */,
+				F800000000000009 /* Passport.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FA0000000000000A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FC810FD62F389848007BF3B0 /* CreditManager.swift */,
+				F80000000000000A /* APIService.swift */,
+				F80000000000000B /* AuthManager.swift */,
+				F80000000000000C /* SupabaseService.swift */,
+				F80000000000000D /* WeatherService.swift */,
+				F80000000000000E /* AIService.swift */,
+				F800000000000020 /* StoreManager.swift */,
+				F800000000000031 /* GroqService.swift */,
+				F800000000000032 /* ClaudeService.swift */,
+				F800000000000040 /* TicketmasterService.swift */,
+				F800000000000060 /* CitySearchService.swift */,
+				F800000000000034 /* UserManager.swift */,
+				F800000000000070 /* ImagePipelineConfig.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		FA0000000000000B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F80000000000000F /* Extensions.swift */,
+				F800000000000061 /* StampImageMapping.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		FA0000000000000C /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				FA00000000000016 /* Views */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		FA0000000000000D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FA00000000000017 /* Views */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		FA0000000000000E /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				FA00000000000018 /* Views */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		FA0000000000000F /* Passport */ = {
+			isa = PBXGroup;
+			children = (
+				FA00000000000019 /* Views */,
+			);
+			path = Passport;
+			sourceTree = "<group>";
+		};
+		FA00000000000010 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				FA0000000000001A /* Views */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		FA00000000000011 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				FA0000000000001B /* Views */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		FA00000000000012 /* Generating */ = {
+			isa = PBXGroup;
+			children = (
+				FA0000000000001C /* Views */,
+			);
+			path = Generating;
+			sourceTree = "<group>";
+		};
+		FA00000000000013 /* Plan */ = {
+			isa = PBXGroup;
+			children = (
+				FA0000000000001D /* Views */,
+			);
+			path = Plan;
+			sourceTree = "<group>";
+		};
+		FA00000000000014 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FA0000000000001E /* Views */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		FA00000000000016 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000010 /* AuthView.swift */,
+				F800000000000035 /* AppleSignInView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA00000000000017 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000011 /* ExploreView.swift */,
+				F800000000000012 /* TripsListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA00000000000018 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000013 /* WorldMapView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA00000000000019 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000014 /* PassportView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA0000000000001A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000015 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA0000000000001B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000016 /* OnboardingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA0000000000001C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000017 /* GeneratingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA0000000000001D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000018 /* CreateTripView.swift */,
+				F800000000000019 /* TripDetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA0000000000001E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F80000000000001A /* EditProfileView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA00000000000030 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000030 /* UIComponents.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		FA00000000000034 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000033 /* Translations.swift */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		FA00000000000050 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F800000000000050 /* SpaceMono-Regular.ttf */,
+				F800000000000051 /* SpaceMono-Bold.ttf */,
+				F800000000000052 /* SpaceMono-Italic.ttf */,
+				F800000000000053 /* SpaceMono-BoldItalic.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FB00000000000001 /* Guroute */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC00000000000001 /* Build configuration list for PBXNativeTarget "Guroute" */;
+			buildPhases = (
+				FB00000000000002 /* Sources */,
+				F900000000000001 /* Frameworks */,
+				FB00000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Guroute;
+			packageProductDependencies = (
+				FD00000000000001 /* Supabase */,
+				FD00000000000002 /* Alamofire */,
+				FD00000000000003 /* Nuke */,
+				FD00000000000004 /* NukeUI */,
+				FD00000000000005 /* KeychainAccess */,
+				FD00000000000006 /* Lottie */,
+			);
+			productName = Guroute;
+			productReference = F800000000000000 /* Guroute.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FE00000000000000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					FB00000000000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = FC00000000000000 /* Build configuration list for PBXProject "Guroute" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = tr;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				tr,
+				Base,
+			);
+			mainGroup = FA00000000000000;
+			packageReferences = (
+				FE00000000000001 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				FE00000000000002 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				FE00000000000003 /* XCRemoteSwiftPackageReference "Nuke" */,
+				FE00000000000004 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				FE00000000000005 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
+			productRefGroup = FA00000000000002 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FB00000000000001 /* Guroute */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FB00000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F70000000000001B /* Assets.xcassets in Resources */,
+				F700000000000021 /* countries.geojson in Resources */,
+				F700000000000050 /* SpaceMono-Regular.ttf in Resources */,
+				F700000000000051 /* SpaceMono-Bold.ttf in Resources */,
+				F700000000000052 /* SpaceMono-Italic.ttf in Resources */,
+				F700000000000053 /* SpaceMono-BoldItalic.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FB00000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F700000000000001 /* GurouteApp.swift in Sources */,
+				F700000000000002 /* ContentView.swift in Sources */,
+				F700000000000003 /* AppConfig.swift in Sources */,
+				F700000000000004 /* AppColors.swift in Sources */,
+				F700000000000005 /* ThemeManager.swift in Sources */,
+				F700000000000006 /* Trip.swift in Sources */,
+				F700000000000007 /* User.swift in Sources */,
+				F700000000000008 /* Weather.swift in Sources */,
+				F700000000000009 /* Passport.swift in Sources */,
+				F70000000000000A /* APIService.swift in Sources */,
+				F70000000000000B /* AuthManager.swift in Sources */,
+				F70000000000000C /* SupabaseService.swift in Sources */,
+				F70000000000000D /* WeatherService.swift in Sources */,
+				F70000000000000E /* AIService.swift in Sources */,
+				F70000000000000F /* Extensions.swift in Sources */,
+				F700000000000061 /* StampImageMapping.swift in Sources */,
+				F700000000000010 /* AuthView.swift in Sources */,
+				F700000000000011 /* ExploreView.swift in Sources */,
+				F700000000000012 /* TripsListView.swift in Sources */,
+				F700000000000013 /* WorldMapView.swift in Sources */,
+				F700000000000014 /* PassportView.swift in Sources */,
+				F700000000000015 /* SettingsView.swift in Sources */,
+				F700000000000016 /* OnboardingView.swift in Sources */,
+				F700000000000017 /* GeneratingView.swift in Sources */,
+				F700000000000018 /* CreateTripView.swift in Sources */,
+				F700000000000019 /* TripDetailView.swift in Sources */,
+				F70000000000001A /* EditProfileView.swift in Sources */,
+				F700000000000020 /* StoreManager.swift in Sources */,
+				F700000000000030 /* UIComponents.swift in Sources */,
+				F700000000000031 /* GroqService.swift in Sources */,
+				F700000000000032 /* ClaudeService.swift in Sources */,
+				F700000000000040 /* TicketmasterService.swift in Sources */,
+				F700000000000060 /* CitySearchService.swift in Sources */,
+				F700000000000033 /* Translations.swift in Sources */,
+				FC810FD72F389848007BF3B0 /* CreditManager.swift in Sources */,
+				F700000000000034 /* UserManager.swift in Sources */,
+				F700000000000035 /* AppleSignInView.swift in Sources */,
+				F700000000000070 /* ImagePipelineConfig.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FC00000000000002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FC00000000000003 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FC00000000000004 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F80000000000001E /* Config.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Guroute/Guroute.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 723929HJ79;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Guroute/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Guroute;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.guroute.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FC00000000000005 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F80000000000001E /* Config.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Guroute/Guroute.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 723929HJ79;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Guroute/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Guroute;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.guroute.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FC00000000000000 /* Build configuration list for PBXProject "Guroute" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC00000000000002 /* Debug */,
+				FC00000000000003 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC00000000000001 /* Build configuration list for PBXNativeTarget "Guroute" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC00000000000004 /* Debug */,
+				FC00000000000005 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FE00000000000001 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		FE00000000000002 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.0;
+			};
+		};
+		FE00000000000003 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.0.0;
+			};
+		};
+		FE00000000000004 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.0;
+			};
+		};
+		FE00000000000005 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FD00000000000001 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE00000000000001 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+		FD00000000000002 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE00000000000002 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		FD00000000000003 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE00000000000003 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		FD00000000000004 /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE00000000000003 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
+		};
+		FD00000000000005 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE00000000000004 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+		FD00000000000006 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE00000000000005 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = FE00000000000000 /* Project object */;
+}

@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "filename" : "Arenal Volcano in Costa Rica.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

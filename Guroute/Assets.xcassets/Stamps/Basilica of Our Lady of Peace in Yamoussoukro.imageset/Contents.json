@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "filename" : "Basilica of Our Lady of Peace in Yamoussoukro.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "name": "Guroute Weekly Destinations Update",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [1],
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Her Pazartesi 09:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "={{$credentials.anthropicApiKey}}"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-3-haiku-20240307\",\n  \"max_tokens\": 2000,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Seyahat uygulaması için bu hafta öne çıkaracağımız 10 destinasyon öner. Her destinasyon için şu bilgileri JSON formatında ver:\\n\\n1. name: Şehir/yer adı\\n2. country: Ülke\\n3. description: Kısa açıklama (max 50 karakter)\\n4. category: story/trending/seasonal/popular birinden\\n5. season: winter/spring/summer/fall/all\\n6. seasonal_tag: Mevsimsel etiket\\n7. rating: 4.0-5.0 arası\\n8. trend_percentage: 10-60 arası\\n9. primary_color: hex renk (# olmadan)\\n10. secondary_color: hex renk (# olmadan)\\n11. search_keywords: Unsplash arama için 3 keyword array\\n\\nÖnemli:\\n- Şu an {{ $now.format('MMMM') }} ayındayız\\n- Mevsime uygun öneriler yap\\n- Farklı kategorilerde dengeli dağıt\\n- Popüler ama aynı zamanda ilginç yerler seç\\n\\nSadece JSON array döndür, başka açıklama ekleme.\"\n    }\n  ]\n}"
+      },
+      "id": "claude-api",
+      "name": "Claude API - Destinasyon Öner",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [400, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Anthropic API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Claude response'dan JSON array'i parse et\nconst response = $input.first().json;\nconst content = response.content[0].text;\n\n// JSON'u parse et\nlet destinations;\ntry {\n  destinations = JSON.parse(content);\n} catch (e) {\n  // Eğer markdown code block içindeyse\n  const match = content.match(/```json\\n([\\s\\S]*?)\\n```/);\n  if (match) {\n    destinations = JSON.parse(match[1]);\n  } else {\n    throw new Error('JSON parse edilemedi');\n  }\n}\n\n// Her destinasyonu ayrı item olarak döndür\nreturn destinations.map(dest => ({ json: dest }));"
+      },
+      "id": "parse-destinations",
+      "name": "Destinasyonları Parse Et",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [600, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.unsplash.com/search/photos",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Client-ID {{$credentials.unsplashAccessKey}}"
+            }
+          ]
+        },
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "={{ $json.search_keywords.join(' ') }} travel landmark"
+            },
+            {
+              "name": "per_page",
+              "value": "1"
+            },
+            {
+              "name": "orientation",
+              "value": "landscape"
+            }
+          ]
+        }
+      },
+      "id": "unsplash-api",
+      "name": "Unsplash - Görsel Bul",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [800, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "YOUR_UNSPLASH_CREDENTIAL_ID",
+          "name": "Unsplash API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Input'tan destinasyon ve Unsplash sonucunu al\nconst destination = $('Destinasyonları Parse Et').item.json;\nconst unsplashResult = $input.first().json;\n\n// Görsel URL'ini al (fallback ile)\nlet imageUrl = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80';\n\nif (unsplashResult.results && unsplashResult.results.length > 0) {\n  const photo = unsplashResult.results[0];\n  imageUrl = photo.urls.regular + '&w=400&q=80';\n}\n\n// Supabase için hazırla\nreturn [{\n  json: {\n    name: destination.name,\n    country: destination.country,\n    description: destination.description,\n    image_url: imageUrl,\n    rating: destination.rating,\n    trend_percentage: destination.trend_percentage,\n    seasonal_tag: destination.seasonal_tag,\n    primary_color: destination.primary_color,\n    secondary_color: destination.secondary_color,\n    category: destination.category,\n    season: destination.season,\n    display_order: $itemIndex + 1,\n    is_active: true,\n    search_keywords: destination.search_keywords,\n    updated_at: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "prepare-supabase",
+      "name": "Supabase Verisi Hazırla",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1000, 300]
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "tableId": "destinations",
+        "conflictColumns": ["name", "category"],
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldName": "name", "fieldValue": "={{ $json.name }}" },
+            { "fieldName": "country", "fieldValue": "={{ $json.country }}" },
+            { "fieldName": "description", "fieldValue": "={{ $json.description }}" },
+            { "fieldName": "image_url", "fieldValue": "={{ $json.image_url }}" },
+            { "fieldName": "rating", "fieldValue": "={{ $json.rating }}" },
+            { "fieldName": "trend_percentage", "fieldValue": "={{ $json.trend_percentage }}" },
+            { "fieldName": "seasonal_tag", "fieldValue": "={{ $json.seasonal_tag }}" },
+            { "fieldName": "primary_color", "fieldValue": "={{ $json.primary_color }}" },
+            { "fieldName": "secondary_color", "fieldValue": "={{ $json.secondary_color }}" },
+            { "fieldName": "category", "fieldValue": "={{ $json.category }}" },
+            { "fieldName": "season", "fieldValue": "={{ $json.season }}" },
+            { "fieldName": "display_order", "fieldValue": "={{ $json.display_order }}" },
+            { "fieldName": "is_active", "fieldValue": "={{ $json.is_active }}" },
+            { "fieldName": "search_keywords", "fieldValue": "={{ $json.search_keywords }}" },
+            { "fieldName": "updated_at", "fieldValue": "={{ $json.updated_at }}" }
+          ]
+        }
+      },
+      "id": "supabase-upsert",
+      "name": "Supabase - Kaydet",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1200, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "summary",
+              "name": "summary",
+              "value": "=✅ Guroute destinasyonları güncellendi!\n\n📍 {{ $items.length }} destinasyon işlendi\n📅 {{ $now.format('DD MMMM YYYY HH:mm') }}\n\n🔄 Sonraki güncelleme: Gelecek Pazartesi",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "set-summary",
+      "name": "Özet Oluştur",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [1400, 300]
+    }
+  ],
+  "connections": {
+    "Her Pazartesi 09:00": {
+      "main": [
+        [{ "node": "Claude API - Destinasyon Öner", "type": "main", "index": 0 }]
+      ]
+    },
+    "Claude API - Destinasyon Öner": {
+      "main": [
+        [{ "node": "Destinasyonları Parse Et", "type": "main", "index": 0 }]
+      ]
+    },
+    "Destinasyonları Parse Et": {
+      "main": [
+        [{ "node": "Unsplash - Görsel Bul", "type": "main", "index": 0 }]
+      ]
+    },
+    "Unsplash - Görsel Bul": {
+      "main": [
+        [{ "node": "Supabase Verisi Hazırla", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase Verisi Hazırla": {
+      "main": [
+        [{ "node": "Supabase - Kaydet", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Kaydet": {
+      "main": [
+        [{ "node": "Özet Oluştur", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

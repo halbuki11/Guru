@@ -1,0 +1,16 @@
+// Configuration settings file
+// API keys are in Config.local.xcconfig (NOT committed to git)
+
+// Include local configuration (contains actual API keys)
+#include? "Config.local.xcconfig"
+
+// Default placeholder values (overridden by Config.local.xcconfig)
+SUPABASE_URL =
+SUPABASE_ANON_KEY =
+GROQ_API_KEY =
+CLAUDE_API_KEY =
+WEATHER_API_KEY =
+TICKETMASTER_API_KEY =
+
+PRODUCT_BUNDLE_IDENTIFIER = com.guroute.app
+DEVELOPMENT_TEAM = 723929HJ79

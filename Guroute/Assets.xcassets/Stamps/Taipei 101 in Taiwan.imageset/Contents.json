@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "filename" : "Taipei 101 in Taiwan.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

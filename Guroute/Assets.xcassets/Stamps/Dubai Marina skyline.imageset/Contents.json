@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "filename" : "Dubai Marina skyline.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

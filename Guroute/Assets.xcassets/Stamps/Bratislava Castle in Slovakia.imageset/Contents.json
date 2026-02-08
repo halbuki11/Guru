@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "filename" : "Bratislava Castle in Slovakia.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

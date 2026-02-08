@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "filename" : "Lake Bunyonyi in Uganda.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

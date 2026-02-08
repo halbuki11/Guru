@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "filename" : "Mount Kilimanjaro.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

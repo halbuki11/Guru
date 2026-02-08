@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "filename" : "Pyramids of Giza.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

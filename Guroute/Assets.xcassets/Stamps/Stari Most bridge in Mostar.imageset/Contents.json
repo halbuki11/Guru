@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "filename" : "Stari Most bridge in Mostar.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

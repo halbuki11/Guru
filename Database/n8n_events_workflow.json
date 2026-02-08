@@ -1,0 +1,317 @@
+{
+  "name": "Guroute Weekly Events Update (Ticketmaster)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [1],
+              "triggerAtHour": 10
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Her Pazartesi 10:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://app.ticketmaster.com/discovery/v2/events.json",
+        "authentication": "none",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$credentials.ticketmasterApiKey}}" },
+            { "name": "classificationName", "value": "music" },
+            { "name": "startDateTime", "value": "={{ $now.toISO().split('T')[0] }}T00:00:00Z" },
+            { "name": "endDateTime", "value": "={{ $now.plus({months: 6}).toISO().split('T')[0] }}T23:59:59Z" },
+            { "name": "size", "value": "100" },
+            { "name": "sort", "value": "relevance,desc" },
+            { "name": "countryCode", "value": "TR,DE,GB,FR,US,NL,ES,IT" }
+          ]
+        }
+      },
+      "id": "tm-music",
+      "name": "Ticketmaster - Müzik",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [400, 200]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://app.ticketmaster.com/discovery/v2/events.json",
+        "authentication": "none",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$credentials.ticketmasterApiKey}}" },
+            { "name": "classificationName", "value": "sports" },
+            { "name": "startDateTime", "value": "={{ $now.toISO().split('T')[0] }}T00:00:00Z" },
+            { "name": "endDateTime", "value": "={{ $now.plus({months: 3}).toISO().split('T')[0] }}T23:59:59Z" },
+            { "name": "size", "value": "50" },
+            { "name": "sort", "value": "relevance,desc" },
+            { "name": "keyword", "value": "UEFA,Champions,Formula 1,Grand Prix,NBA" }
+          ]
+        }
+      },
+      "id": "tm-sports",
+      "name": "Ticketmaster - Spor",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [400, 400]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://app.ticketmaster.com/discovery/v2/events.json",
+        "authentication": "none",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$credentials.ticketmasterApiKey}}" },
+            { "name": "keyword", "value": "festival,Tomorrowland,Coachella,Glastonbury,Lollapalooza,Primavera" },
+            { "name": "startDateTime", "value": "={{ $now.toISO().split('T')[0] }}T00:00:00Z" },
+            { "name": "endDateTime", "value": "={{ $now.plus({months: 6}).toISO().split('T')[0] }}T23:59:59Z" },
+            { "name": "size", "value": "50" },
+            { "name": "sort", "value": "relevance,desc" }
+          ]
+        }
+      },
+      "id": "tm-festivals",
+      "name": "Ticketmaster - Festivaller",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [400, 600]
+    },
+    {
+      "parameters": {
+        "mode": "append"
+      },
+      "id": "merge-events",
+      "name": "Birleştir",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [600, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Ticketmaster API response'larını parse et ve normalize et\nconst allItems = $input.all();\nconst seen = new Set();\nconst events = [];\n\nfor (const item of allItems) {\n  const response = item.json;\n  const embedded = response._embedded;\n  if (!embedded || !embedded.events) continue;\n\n  for (const ev of embedded.events) {\n    // Duplicate kontrolü (ticketmaster_id)\n    if (seen.has(ev.id)) continue;\n    seen.add(ev.id);\n\n    // Tarih bilgisi\n    const startDate = ev.dates?.start?.localDate || null;\n    const endDate = ev.dates?.end?.localDate || null;\n\n    // Mekan ve şehir\n    const venue = ev._embedded?.venues?.[0];\n    const city = venue?.city?.name || null;\n    const country = venue?.country?.name || venue?.country?.countryCode || null;\n\n    // Kategori belirleme\n    const classifications = ev.classifications?.[0];\n    const segment = (classifications?.segment?.name || '').toLowerCase();\n    const genre = (classifications?.genre?.name || '').toLowerCase();\n    let category = 'music';\n    if (segment === 'sports') category = 'sports';\n    else if (genre.includes('festival') || ev.name.toLowerCase().includes('festival')) category = 'festival';\n\n    // En iyi görsel (en yüksek çözünürlük)\n    const images = ev.images || [];\n    const bestImage = images\n      .filter(img => img.ratio === '16_9' || img.ratio === '3_2')\n      .sort((a, b) => (b.width || 0) - (a.width || 0))[0]\n      || images.sort((a, b) => (b.width || 0) - (a.width || 0))[0];\n    const imageUrl = bestImage?.url || null;\n\n    // Bilet URL\n    const ticketUrl = ev.url || null;\n\n    if (!startDate || !city) continue; // Tarih veya şehir yoksa atla\n\n    events.push({\n      json: {\n        name: ev.name,\n        name_tr: null, // Claude ile sonra çevrilecek\n        description: ev.info || ev.pleaseNote || null,\n        description_tr: null,\n        city: city,\n        country: country,\n        country_tr: null,\n        venue: venue?.name || null,\n        event_date: startDate,\n        end_date: endDate || null,\n        category: category,\n        image_url: imageUrl,\n        ticket_url: ticketUrl,\n        ticketmaster_id: ev.id,\n        is_active: true\n      }\n    });\n  }\n}\n\n// Relevance'a göre sırala, max 80 etkinlik\nreturn events.slice(0, 80);"
+      },
+      "id": "parse-events",
+      "name": "Etkinlikleri Parse Et",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [800, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key", "value": "={{$credentials.anthropicApiKey}}" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-3-haiku-20240307\",\n  \"max_tokens\": 4000,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Aşağıdaki etkinlik isimlerini ve açıklamalarını Türkçe'ye çevir. Sanatçı isimlerini çevirme, sadece açıklama ve ülke isimlerini çevir. JSON array olarak döndür, her objede: name_tr, description_tr, country_tr alanları olsun. Eğer isim zaten Türkçe ise aynısını yaz.\\n\\nETKİNLİKLER:\\n{{ JSON.stringify($input.all().map(i => ({ name: i.json.name, description: i.json.description, country: i.json.country }))) }}\\n\\nSadece JSON array döndür, başka bir şey yazma.\"\n    }\n  ]\n}"
+      },
+      "id": "claude-translate",
+      "name": "Claude - Türkçe Çeviri",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1000, 400],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "YOUR_ANTHROPIC_CREDENTIAL_ID",
+          "name": "Anthropic API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Claude çevirisini parse et ve orijinal verilerle birleştir\nconst events = $('Etkinlikleri Parse Et').all();\nconst claudeResponse = $input.first().json;\n\nlet translations = [];\ntry {\n  const content = claudeResponse.content[0].text;\n  translations = JSON.parse(content);\n} catch (e) {\n  // Çeviri başarısız olursa orijinal verileri kullan\n  const match = claudeResponse.content?.[0]?.text?.match(/```json\\n([\\s\\S]*?)\\n```/);\n  if (match) translations = JSON.parse(match[1]);\n}\n\nreturn events.map((item, i) => {\n  const tr = translations[i] || {};\n  return {\n    json: {\n      ...item.json,\n      name_tr: tr.name_tr || item.json.name,\n      description_tr: tr.description_tr || item.json.description,\n      country_tr: tr.country_tr || item.json.country\n    }\n  };\n});"
+      },
+      "id": "merge-translations",
+      "name": "Çevirileri Birleştir",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1200, 400]
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "tableId": "events",
+        "conflictColumns": ["ticketmaster_id"],
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldName": "name", "fieldValue": "={{ $json.name }}" },
+            { "fieldName": "name_tr", "fieldValue": "={{ $json.name_tr }}" },
+            { "fieldName": "description", "fieldValue": "={{ $json.description }}" },
+            { "fieldName": "description_tr", "fieldValue": "={{ $json.description_tr }}" },
+            { "fieldName": "city", "fieldValue": "={{ $json.city }}" },
+            { "fieldName": "country", "fieldValue": "={{ $json.country }}" },
+            { "fieldName": "country_tr", "fieldValue": "={{ $json.country_tr }}" },
+            { "fieldName": "venue", "fieldValue": "={{ $json.venue }}" },
+            { "fieldName": "event_date", "fieldValue": "={{ $json.event_date }}" },
+            { "fieldName": "end_date", "fieldValue": "={{ $json.end_date }}" },
+            { "fieldName": "category", "fieldValue": "={{ $json.category }}" },
+            { "fieldName": "image_url", "fieldValue": "={{ $json.image_url }}" },
+            { "fieldName": "ticket_url", "fieldValue": "={{ $json.ticket_url }}" },
+            { "fieldName": "ticketmaster_id", "fieldValue": "={{ $json.ticketmaster_id }}" },
+            { "fieldName": "is_active", "fieldValue": "={{ $json.is_active }}" }
+          ]
+        }
+      },
+      "id": "supabase-upsert",
+      "name": "Supabase - Kaydet",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1400, 400],
+      "credentials": {
+        "supabaseApi": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Geçmiş etkinlikleri deaktif et\nconst today = $now.toISO().split('T')[0];\nreturn [{ json: { today } }];"
+      },
+      "id": "cleanup-prep",
+      "name": "Temizlik Hazırlığı",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1600, 400]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$credentials.supabaseUrl}}/rest/v1/events",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$credentials.supabaseAnonKey}}" },
+            { "name": "Authorization", "value": "=Bearer {{$credentials.supabaseAnonKey}}" },
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Prefer", "value": "return=minimal" }
+          ]
+        },
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "event_date", "value": "=lt.{{ $json.today }}" },
+            { "name": "is_active", "value": "eq.true" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{ \"is_active\": false }"
+      },
+      "id": "deactivate-past",
+      "name": "Geçmiş Etkinlikleri Kapat",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1800, 400]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "summary",
+              "name": "summary",
+              "value": "=✅ Guroute etkinlikleri güncellendi!\n\n🎵 Müzik + 🏟️ Spor + 🎪 Festival\n📅 {{ $now.format('DD MMMM YYYY HH:mm') }}\n\n🔄 Sonraki güncelleme: Gelecek Pazartesi",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "set-summary",
+      "name": "Özet",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [2000, 400]
+    }
+  ],
+  "connections": {
+    "Her Pazartesi 10:00": {
+      "main": [
+        [
+          { "node": "Ticketmaster - Müzik", "type": "main", "index": 0 },
+          { "node": "Ticketmaster - Spor", "type": "main", "index": 0 },
+          { "node": "Ticketmaster - Festivaller", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Ticketmaster - Müzik": {
+      "main": [
+        [{ "node": "Birleştir", "type": "main", "index": 0 }]
+      ]
+    },
+    "Ticketmaster - Spor": {
+      "main": [
+        [{ "node": "Birleştir", "type": "main", "index": 1 }]
+      ]
+    },
+    "Ticketmaster - Festivaller": {
+      "main": [
+        [{ "node": "Birleştir", "type": "main", "index": 2 }]
+      ]
+    },
+    "Birleştir": {
+      "main": [
+        [{ "node": "Etkinlikleri Parse Et", "type": "main", "index": 0 }]
+      ]
+    },
+    "Etkinlikleri Parse Et": {
+      "main": [
+        [{ "node": "Claude - Türkçe Çeviri", "type": "main", "index": 0 }]
+      ]
+    },
+    "Claude - Türkçe Çeviri": {
+      "main": [
+        [{ "node": "Çevirileri Birleştir", "type": "main", "index": 0 }]
+      ]
+    },
+    "Çevirileri Birleştir": {
+      "main": [
+        [{ "node": "Supabase - Kaydet", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Kaydet": {
+      "main": [
+        [{ "node": "Temizlik Hazırlığı", "type": "main", "index": 0 }]
+      ]
+    },
+    "Temizlik Hazırlığı": {
+      "main": [
+        [{ "node": "Geçmiş Etkinlikleri Kapat", "type": "main", "index": 0 }]
+      ]
+    },
+    "Geçmiş Etkinlikleri Kapat": {
+      "main": [
+        [{ "node": "Özet", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
